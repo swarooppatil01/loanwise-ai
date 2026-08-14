@@ -7,18 +7,24 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = "LoanWise AI API"
     app_version: str = "0.1.0"
-    environment: str = "development"
-    debug: bool = True
+    environment: str = "production"
+    debug: bool = False
 
     database_url: str = Field(
         default="postgresql+psycopg://loanwise:loanwise@localhost:5432/loanwise"
     )
 
-    jwt_secret_key: str = "CHANGE_ME_IN_ENV"
+    jwt_secret_key: str = Field(
+        default="CHANGE_ME_IN_ENV",
+        validation_alias="SECRET_KEY",
+    )
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
 
-    cors_origins: str = "http://localhost:5173"
+    cors_origins: str = Field(
+        default="http://localhost:5173",
+        validation_alias="CORS_ORIGINS",
+    )
 
     ai_provider: str = "gemini"
     ai_model: str = "gemini-2.5-flash"
