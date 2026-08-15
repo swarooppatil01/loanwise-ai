@@ -7,8 +7,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = "LoanWise AI API"
     app_version: str = "0.1.0"
-    environment: str = "production"
-    debug: bool = False
+    environment: str = "development"
+    debug: bool = True
 
     database_url: str = Field(
         default="postgresql+psycopg://loanwise:loanwise@localhost:5432/loanwise"
